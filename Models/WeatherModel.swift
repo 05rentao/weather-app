@@ -47,6 +47,7 @@ struct WeatherData: Decodable {
         case precipitationProbability = "precipitation_probability"
         case precipitation
     }
+
 }
 
 
@@ -72,13 +73,22 @@ struct Location: Identifiable, Decodable, Hashable {
     // init generate locationID when decoding
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        lat = try container.decode(Double.self, forKey: .lat)
-        lon = try container.decode(Double.self, forKey: .lon)
-        name = try container.decode(String.self, forKey: .name)
-        display_name = try container.decode(String.self, forKey: .display_name)
-        address = try container.decode(Address.self, forKey: .address)
-        locationID = UUID().uuidString // Auto-generate if not in JSON
+        
+        let latString = try container.decode(String.self, forKey: .lat)
+        let lonString = try container.decode(String.self, forKey: .lon)
+        
+        guard let lat = Double(latString), let lon = Double(lonString) else {
+            throw DecodingError.dataCorruptedError(forKey: .lat, in: container, debugDescription: "Lat/Lon not convertible to Double")
+        }
+        
+        self.lat = lat
+        self.lon = lon
+        self.name = try container.decode(String.self, forKey: .name)
+        self.display_name = try container.decode(String.self, forKey: .display_name)
+        self.address = try container.decode(Address.self, forKey: .address)
+        self.locationID = UUID().uuidString
     }
+
 
     // manual init
     init(locationID: String = UUID().uuidString, lat: Double, lon: Double, name: String, display_name: String, address: Address) {
