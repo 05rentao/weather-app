@@ -1,0 +1,54 @@
+# Xcode
+DerivedData/
+*.xcworkspace
+!default.xcworkspace
+*.xcuserdata
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+
+# SwiftPM
+.build/
+.swiftpm/xcode/package.xcworkspace/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Swift Package Manager binary artifacts
+Artifacts/
+
+# SPM local package cache
+.swiftpm/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Archives
+*.xcarchive
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# App Thinning
+App Thinning Size Report.txt
+
+# Firebase
+GoogleService-Info.plist
+
+# Environment
+.env
+*.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# Misc
+*.orig
+*.DS_Store
+
+# IDE Tools
+.idea/
